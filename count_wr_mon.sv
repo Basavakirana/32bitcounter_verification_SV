@@ -14,7 +14,16 @@ class count_wr_mon;
 		this.wr_data = new();
 	endfunction
 
-	virtual task start();
+	virtual task monitor();
+		@(wr_mon_if.wr_mon_cb);
+		wr_data.rst = wr_mon_if.wr_mon_cb.rst;
+		wr_data.load = wr_mon_if.wr_mon_cb.load;
+		wr_data.mode = wr_mon_if.wr_mon_cb.mode;
+		wr_data.data = wr_mon_if.wr_mon_cb.data;
+		wr_data.display("data from write monitor");
+	endtask
+
+   	virtual task start();
 	fork forever
 		begin
 		     monitor();
@@ -23,15 +32,6 @@ class count_wr_mon;
 		end
 	join_none
 	$display("wr monitor: monitor started at time =%t",$time);
-	endtask
-
-	virtual task monitor();
-		@(wr_mon_if.wr_mon_cb);
-		wr_data.rst = wr_mon_if.wr_mon_cb.rst;
-		wr_data.load = wr_mon_if.wr_mon_cb.load;
-		wr_data.mode = wr_mon_if.wr_mon_cb.mode;
-		wr_data.data = wr_mon_if.wr_mon_cb.data;
-		wr_data.display("data from write monitor");
 	endtask
 endclass
 

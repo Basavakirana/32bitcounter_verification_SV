@@ -34,9 +34,9 @@ module count_top();
 		$shm_probe("ACTMF");
 	end
 
-        initial begin
-            #(cycle*100000); // Adjust timeout as needed
-            $display("*** SIMULATION TIMEOUT - POSSIBLE DEADLOCK ***");
-            $finish;
-        end
+//        initial begin
+//            #(cycle*100000); // Adjust timeout as needed
+  //          $display("*** SIMULATION TIMEOUT - POSSIBLE DEADLOCK ***");
+    //        $finish;
+      //  end
 endmodule

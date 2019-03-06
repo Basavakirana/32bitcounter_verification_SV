@@ -66,22 +66,6 @@ class count_sb;
     mem_covg = new();
   endfunction
 
-  virtual task start();
-    fork
-      begin
-        forever begin
-          rm2sb.get(rm_data);
-	  ref_data++;
-          rdmon2sb.get(rd_mon_data);
-	  mon_data++;
-          check(rd_mon_data);
-	end
-    end
-    join_none
-    $display("Scoreboard: Started at time %t", $time);
-  endtask
-
-
   virtual task check(count_trans mon_data);
           if(rm_data.data_out == rd_mon_data.data_out) begin
             no_of_matches++;
@@ -115,6 +99,21 @@ class count_sb;
         end
 	end
   endtask	
+
+  virtual task start();
+    fork
+      begin
+        forever begin
+          rm2sb.get(rm_data);
+	  ref_data++;
+          rdmon2sb.get(rd_mon_data);
+	  mon_data++;
+          check(rd_mon_data);
+	end
+    end
+    join_none
+    $display("Scoreboard: Started at time %t", $time);
+  endtask
 
   virtual function void report();
     $display("----------------------------------------------------------");

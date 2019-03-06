@@ -13,7 +13,15 @@ class count_rd_mon;
 		this.rdmon2sb = rdmon2sb;
 	endfunction
 
-	virtual task start();
+	virtual task monitor();
+		@(rd_mon_if.rd_mon_cb);
+		begin
+			rd_data.data_out = rd_mon_if.rd_mon_cb.data_out;
+			rd_data.display("data from rd monitor");
+		end
+	endtask
+
+    	virtual task start();
 		fork forever
 			begin
 			     monitor();
@@ -22,13 +30,5 @@ class count_rd_mon;
 			end
 		join_none
 		$display("rd mon:started at time %t",$time);
-	endtask
-
-	virtual task monitor();
-		@(rd_mon_if.rd_mon_cb);
-		begin
-			rd_data.data_out = rd_mon_if.rd_mon_cb.data_out;
-			rd_data.display("data from rd monitor");
-		end
 	endtask
 endclass

@@ -45,7 +45,7 @@ class count_rm;
             ref_count.rst = wr_mon_data.rst;
             ref_count.load = wr_mon_data.load;
             ref_count.mode = wr_mon_data.mode;
-            ref_count,data = wr_mon_data.data;
+            ref_count.data = wr_mon_data.data;
 		//	rm2sb.put(wr_mon_data);
 			rm2sb.put(ref_count);
 		end

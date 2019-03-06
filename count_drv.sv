@@ -12,6 +12,16 @@ class count_drv;
 		this.drv_if = drv_if;
 	endfunction
 
+	virtual task drive();
+		@(drv_if.drv_cb);
+#5;
+		drv_if.drv_cb.rst<=data2duv.rst;
+		drv_if.drv_cb.load<=data2duv.load;
+		drv_if.drv_cb.mode<=data2duv.mode;
+		drv_if.drv_cb.data<=data2duv.data;
+		data2duv.display("transaction driven");
+	endtask
+
 	virtual task start();
 		@(drv_if.drv_cb);
 		drv_if.drv_cb.rst<=0;
@@ -27,14 +37,4 @@ class count_drv;
 		join_none
 		$display("driver:started driving at time %t",$time);
 	endtask
-
-	virtual task drive();
-		@(drv_if.drv_cb);
-#5;
-		drv_if.drv_cb.rst<=data2duv.rst;
-		drv_if.drv_cb.load<=data2duv.load;
-		drv_if.drv_cb.mode<=data2duv.mode;
-		drv_if.drv_cb.data<=data2duv.data;
-		data2duv.display("transaction driven");
-	endtask
-endclass
+ endclass
