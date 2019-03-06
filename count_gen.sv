@@ -22,7 +22,12 @@ class count_gen;
 				$error("randomized transactions failed %d",i);
 			end
 			trans_h.trans_id++;
-			data2send = new trans_h;
+			data2send = new();
+            data2send.rst = trans_h.rst;
+            data2send.load = trans_h.load;
+            data2send.mode = trans_h.mode;
+            data2send.data = trans_h.data;
+            data2send.data_out = trans_h.data_out;
 			gen2drv.put(data2send);
 		end
 		$display("generator:generating trans completed %d",no_of_transactions);

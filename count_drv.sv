@@ -30,6 +30,7 @@ class count_drv;
 
 	virtual task drive();
 		@(drv_if.drv_cb);
+#5;
 		drv_if.drv_cb.rst<=data2duv.rst;
 		drv_if.drv_cb.load<=data2duv.load;
 		drv_if.drv_cb.mode<=data2duv.mode;

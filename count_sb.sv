@@ -14,7 +14,7 @@ class count_sb;
   int mon_data=0;
   int no_of_mismatches=0;
   int no_of_matches=0;
-  int no_of_transactions=0;
+  int no_of_transactions=100;
 
  covergroup mem_covg;
 	option.per_instance=1;
@@ -58,9 +58,11 @@ class count_sb;
  endgroup
 
   function new(mailbox #(count_trans) rm2sb,
-               mailbox #(count_trans) rdmon2sb);
+               mailbox #(count_trans) rdmon2sb,
+               int num_trans = 100);
     this.rm2sb = rm2sb;
     this.rdmon2sb = rdmon2sb;
+    this.no_of_transactions = num_trans;
     mem_covg = new();
   endfunction
 
@@ -109,7 +111,8 @@ class count_sb;
 		if(data_verified >= no_of_transactions)
 		begin
 			->DONE;
-		end
+            $display("DONE event triggered - %0d transactions verified", data_verified);
+        end
 	end
   endtask	
 

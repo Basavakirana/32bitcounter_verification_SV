@@ -3,6 +3,7 @@ class count_env;
 	virtual count_if.DRV_MP drv_if;
 	virtual count_if.WR_MON_MP wr_mon_if;
 	virtual count_if.RD_MON_MP rd_mon_if;
+    int no_of_transactions =100;
 
 	mailbox #(count_trans) gen2drv =new();
 	mailbox #(count_trans) wrmon2rm =new();
@@ -18,10 +19,12 @@ class count_env;
 
 	function new(virtual count_if.DRV_MP drv_if,
 		     virtual count_if.WR_MON_MP wr_mon_if,
-		     virtual count_if.RD_MON_MP rd_mon_if);
+		     virtual count_if.RD_MON_MP rd_mon_if,
+             int num_trans=100);
 		this.drv_if = drv_if;
 		this.wr_mon_if = wr_mon_if;
 		this.rd_mon_if = rd_mon_if;
+        this.no_of_transactions = num_trans;
 	endfunction
 
 	virtual task build;
@@ -33,21 +36,14 @@ class count_env;
 		sb_h = new(rdmon2sb,rm2sb);
 	endtask
 
-	virtual task run();
-		reset_dut;
-		start();
-		stop();
-		sb_h.report();
-	endtask
-
-	virtual task reset_dut();
+	task reset_dut();
 		@(drv_if.drv_cb);
 			drv_if.drv_cb.rst <= 1'b1;
 		@(drv_if.drv_cb);	
 			drv_if.drv_cb.rst <= 1'b0;
 	endtask
 
-	virtual task start();
+	task start();
 		gen_h.start();
 		drv_h.start();
 		wr_monh.start();
@@ -56,7 +52,14 @@ class count_env;
 		sb_h.start();
 	endtask
 
-	virtual task stop();
+	task stop();
 		wait(sb_h.DONE.triggered);
 	endtask
-endclass
+
+	task run();
+		reset_dut;
+		start();
+		stop();
+		sb_h.report();
+	endtask
+ endclass
