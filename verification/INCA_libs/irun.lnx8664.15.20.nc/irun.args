@@ -1,0 +1,10 @@
+//
+// File created by:  irun
+// Do not modify this file
+//
+-access
++rwc
+counter_32.sv
+if.sv
+count_trnas.sv
+count_gen.sv

@@ -1,0 +1,1 @@
+s1(26Feb2019:00:29:30):  irun -access +rwc counter_32.sv if.sv count_trnas.sv count_gen.sv 

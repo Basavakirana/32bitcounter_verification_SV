@@ -1,0 +1,60 @@
+irun(64): 15.20-s051: (c) Copyright 1995-2018 Cadence Design Systems, Inc.
+TOOL:	irun(64)	15.20-s051: Started on Feb 26, 2019 at 00:29:30 IST
+irun
+	-access +rwc
+	counter_32.sv
+	if.sv
+	count_trnas.sv
+	count_gen.sv
+file: counter_32.sv
+	module worklib.updown_counter_32bit:sv
+		errors: 0, warnings: 0
+file: if.sv
+	interface worklib.counter_if:sv
+		errors: 0, warnings: 0
+file: count_trnas.sv
+file: count_gen.sv
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x30f52a16
+		updown_counter_32bit
+		counter_if
+ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.\$unit_0x30f52a16 :compilation_unit <0x1bc3f7ca>
+			streams:   0, words:     0
+		worklib.\$unit_0x30f52a16 :compilation_unit <0x65b4bdab>
+			streams:   9, words:  9676
+		worklib.\$unit_0x30f52a16 :compilation_unit <0x7d11bdf3>
+			streams:   8, words:  8975
+		worklib.counter_if:sv <0x7e03cc51>
+			streams:  17, words:  9914
+		worklib.updown_counter_32bit:sv <0x75346177>
+			streams:   2, words:   939
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                    Instances  Unique
+		Modules:                    1       1
+		Interfaces:                 1       1
+		Registers:                 21      30
+		Scalar wires:               5       -
+		Vectored wires:             1       -
+		Always blocks:              1       1
+		Clocking blocks:            3       3
+		Clocking items:             9       9
+		Parallel blocks:            1       1
+		Compilation units:          1       1
+		SV Class declarations:      2       2
+		SV Class specializations:   2       2
+	Writing initial simulation snapshot: worklib.updown_counter_32bit:sv
+Loading snapshot worklib.updown_counter_32bit:sv .................... Done
+SVSEED default: 1
+ncsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+ncsim> source /tools/cadence/INCISIVE152/tools/inca/files/ncsimrc
+ncsim> run
+ncsim: *W,RNQUIE: Simulation is complete.
+ncsim> exit
+TOOL:	irun(64)	15.20-s051: Exiting on Feb 26, 2019 at 00:29:30 IST  (total: 00:00:00)
