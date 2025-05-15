@@ -75,6 +75,17 @@ class count_sb;
             $display("Reference Model Output: %h", rm_data.data_out);
             $display("DUT Output: %h", rd_mon_data.data_out);
             $display("----------------------------------------------------------");
+            
+            // Create coverage data and sample only for matching transactions
+            cov_data = new rm_data;
+            mem_covg.sample();
+            data_verified++;
+            
+            // Check if we've reached the target number of transactions
+            if(data_verified >= no_of_transactions) begin
+                ->DONE;
+                $display("DONE event triggered - %0d transactions verified", data_verified);
+            end
           end
           else begin
             no_of_mismatches++;
@@ -87,17 +98,6 @@ class count_sb;
 	    rd_mon_data.display("read monitor data");
             $display("----------------------------------------------------------");
           end
-        cov_data = new rm_data;
-	if(cov_data.data_out == rm_data.data_out)
-	begin
-		mem_covg.sample();
-		data_verified++;
-		if(data_verified >= no_of_transactions)
-		begin
-			->DONE;
-            $display("DONE event triggered - %0d transactions verified", data_verified);
-        end
-	end
   endtask	
 
   virtual task start();
